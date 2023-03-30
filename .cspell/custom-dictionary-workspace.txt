@@ -1,0 +1,7 @@
+# Custom Dictionary Words
+backoff
+cblades
+digestmod
+forcelist
+POOLBLOCK
+POOLSIZE

@@ -111,7 +111,7 @@ class TcSession(Session):
             total=retries,
             read=retries,
             connect=retries,
-            backoff_factor=backoff_factor,
+            backoff_factor=backoff_factor,  # type: ignore
             status_forcelist=status_forcelist,
         )
         # mount all https requests

@@ -1,4 +1,5 @@
 """TcEx Framework Module"""
+
 # standard library
 import time
 from collections.abc import Callable
@@ -27,7 +28,7 @@ class TcAuth(HmacAuth, TokenAuth):
         else:  # pragma: no cover
             raise RuntimeError('No valid ThreatConnect API credentials provided.')
 
-    def __call__(self, r):
+    def __call__(self, r):  # type: ignore
         """Add the authorization headers to the request."""
         timestamp = int(time.time())
         if self.auth_type == 'hmac':

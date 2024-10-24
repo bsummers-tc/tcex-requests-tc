@@ -1,11 +1,11 @@
 """TcEx Framework Module"""
+
 # standard library
 import time
 from collections.abc import Callable
 
 # third-party
-from requests import Request  # TYPE-CHECKING
-from requests import auth
+from requests import PreparedRequest, auth
 
 from ...input.field_type.sensitive import Sensitive
 
@@ -33,11 +33,11 @@ class TokenAuth(auth.AuthBase):
         # Return formatted token
         return f'TC-Token {_token}'
 
-    def __call__(self, r: Request) -> Request:
+    def __call__(self, r: PreparedRequest) -> PreparedRequest:
         """Add the authorization headers to the request."""
         timestamp = int(time.time())
 
         # Add required headers to auth.
         r.headers['Authorization'] = self._token_header()
-        r.headers['Timestamp'] = timestamp
+        r.headers['Timestamp'] = str(timestamp)
         return r

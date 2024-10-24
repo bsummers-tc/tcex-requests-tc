@@ -1,4 +1,5 @@
 """TcEx Framework Module"""
+
 # standard library
 import logging
 
@@ -31,7 +32,7 @@ class TcSession(Session):
         log_curl: bool | None = False,
         proxies: dict[str, str] | None = None,
         proxies_enabled: bool | None = False,
-        user_agent: dict | None = None,
+        user_agent: dict[str, str] | None = None,
         verify: bool | str | None = True,
     ):
         """Initialize the Class properties."""
@@ -77,7 +78,7 @@ class TcSession(Session):
                 except Exception:  # nosec
                     pass  # logging curl command is best effort
 
-    def request(self, method, url, **kwargs):  # pylint: disable=arguments-differ
+    def request(self, method, url, **kwargs):  # pylint: disable=arguments-differ  # type: ignore
         """Override request method disabling verify on token renewal if disabled on session."""
         response = super().request(method, self.url(url), **kwargs)
 

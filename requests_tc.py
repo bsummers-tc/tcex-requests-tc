@@ -1,4 +1,5 @@
 """TcEx Framework Module"""
+
 # standard library
 import logging
 from functools import cached_property
@@ -75,7 +76,7 @@ class RequestsTc:
             log_curl=log_curl,
             proxies=proxies or self.proxies,
             proxies_enabled=proxies_enabled,
-            user_agent=registry.app.user_agent,
+            user_agent=registry.app.user_agent,  # type: ignore
             verify=verify,
         )
 

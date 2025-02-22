@@ -9,7 +9,7 @@ from hashlib import sha256
 # third-party
 from requests import PreparedRequest, auth
 
-from ...input.field_type.sensitive import Sensitive  # type: ignore # pylint: disable=import-error
+from ...input.field_type.sensitive import Sensitive  # type: ignore
 
 
 class HmacAuth(auth.AuthBase):

@@ -4,7 +4,7 @@
 import time
 from collections.abc import Callable
 
-from ...input.field_type.sensitive import Sensitive  # type: ignore # pylint: disable=import-error
+from ...input.field_type.sensitive import Sensitive  # type: ignore
 from .hmac_auth import HmacAuth
 from .token_auth import TokenAuth
 
@@ -26,7 +26,8 @@ class TcAuth(HmacAuth, TokenAuth):
             TokenAuth.__init__(self, tc_token)
             self.auth_type = 'token'
         else:  # pragma: no cover
-            raise RuntimeError('No valid ThreatConnect API credentials provided.')
+            ex_msg = 'No valid ThreatConnect API credentials provided.'
+            raise RuntimeError(ex_msg)
 
     def __call__(self, r):  # type: ignore
         """Add the authorization headers to the request."""

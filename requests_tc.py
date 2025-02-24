@@ -34,7 +34,7 @@ class RequestsTc:
         auth: HmacAuth | TokenAuth | TcAuth | None = None,
         base_url: str | None = None,
         log_curl: bool | None = None,
-        proxies: dict[str, str] | None = None,  # pylint: disable=redefined-outer-name
+        proxies: dict[str, str] | None = None,
         proxies_enabled: bool | None = None,
         verify: bool | str | None = None,
     ) -> TcSession:

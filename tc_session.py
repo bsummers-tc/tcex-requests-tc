@@ -1,10 +1,8 @@
 """TcEx Framework Module"""
 
-# standard library
 import contextlib
 import logging
 
-# third-party
 import urllib3
 from requests import Response, Session, adapters
 from urllib3.util.retry import Retry

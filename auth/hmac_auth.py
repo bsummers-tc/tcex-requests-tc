@@ -1,12 +1,10 @@
 """TcEx Framework Module"""
 
-# standard library
 import hmac
 import time
 from base64 import b64encode
 from hashlib import sha256
 
-# third-party
 from requests import PreparedRequest, auth
 
 from ...input.field_type.sensitive import Sensitive  # type: ignore

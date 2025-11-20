@@ -1,10 +1,8 @@
 """TcEx Framework Module"""
 
-# standard library
 import time
 from collections.abc import Callable
 
-# third-party
 from requests import PreparedRequest, auth
 
 from ...input.field_type.sensitive import Sensitive

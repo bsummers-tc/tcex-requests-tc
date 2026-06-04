@@ -59,7 +59,7 @@ class RequestsTc:
         # 3. no token is not available, use api credentials
         if hasattr(registry.app, 'token') and self.install_json.is_external_app is False:
             # token module is only available on tcex, not tcex-app-testing, or tcex-cli
-            tc_token = registry.app.token.get_token  # type: ignore
+            tc_token = registry.app.token.get_token
         elif self.model.tc_token is not None:
             tc_token = self.model.tc_token
 
@@ -75,7 +75,7 @@ class RequestsTc:
             log_curl=log_curl,
             proxies=proxies or self.proxies,
             proxies_enabled=proxies_enabled,
-            user_agent=registry.app.user_agent,  # type: ignore
+            user_agent=registry.app.user_agent,
             verify=verify,
         )
 

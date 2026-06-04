@@ -7,7 +7,7 @@ from hashlib import sha256
 
 from requests import PreparedRequest, auth
 
-from ...input.field_type.sensitive import Sensitive  # type: ignore
+from ...input.field_type.sensitive import Sensitive
 
 
 class HmacAuth(auth.AuthBase):

@@ -22,7 +22,7 @@ class TokenAuth(auth.AuthBase):
         if callable(self.tc_token):
             # Callable - A callable method is provided that will return the token as a plain
             #     string. The callable will have to handle token renewal.
-            _token = self.tc_token()
+            _token = self.tc_token()  # ty: ignore[call-top-callable]
 
         if isinstance(_token, Sensitive):
             # Sensitive - A sensitive string type was passed. Likely no support for renewal.

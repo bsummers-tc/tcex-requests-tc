@@ -3,7 +3,7 @@
 import time
 from collections.abc import Callable
 
-from ...input.field_type.sensitive import Sensitive  # type: ignore
+from ...input.field_type.sensitive import Sensitive
 from .hmac_auth import HmacAuth
 from .token_auth import TokenAuth
 
@@ -28,7 +28,7 @@ class TcAuth(HmacAuth, TokenAuth):
             ex_msg = 'No valid ThreatConnect API credentials provided.'
             raise RuntimeError(ex_msg)
 
-    def __call__(self, r):  # type: ignore
+    def __call__(self, r):
         """Add the authorization headers to the request."""
         timestamp = int(time.time())
         if self.auth_type == 'hmac':

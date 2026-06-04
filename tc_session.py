@@ -7,8 +7,8 @@ import urllib3
 from requests import Response, Session, adapters
 from urllib3.util.retry import Retry
 
-from ..util.requests_to_curl import RequestsToCurl  # type: ignore
-from ..util.util import Util  # type: ignore
+from ..util.requests_to_curl import RequestsToCurl
+from ..util.util import Util
 from .auth.hmac_auth import HmacAuth
 from .auth.tc_auth import TcAuth
 from .auth.token_auth import TokenAuth
@@ -17,7 +17,7 @@ from .auth.token_auth import TokenAuth
 _logger = logging.getLogger(__name__.split('.', maxsplit=1)[0])
 
 # disable ssl warning message
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  # type: ignore
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class TcSession(Session):
@@ -55,7 +55,7 @@ class TcSession(Session):
             self.proxies = proxies
 
         # configure verify
-        self.verify = verify
+        self.verify = verify if verify is not None else True
 
         # Add Retry
         self.retry()
@@ -77,7 +77,7 @@ class TcSession(Session):
                     )
                 )
 
-    def request(self, method, url, **kwargs):  # type: ignore
+    def request(self, method, url, **kwargs):
         """Override request method disabling verify on token renewal if disabled on session."""
         response = super().request(method, self.url(url), **kwargs)
         bad_request_code = 401
@@ -111,7 +111,7 @@ class TcSession(Session):
             total=retries,
             read=retries,
             connect=retries,
-            backoff_factor=backoff_factor,  # type: ignore
+            backoff_factor=backoff_factor,
             status_forcelist=status_forcelist,
         )
         # mount all https requests

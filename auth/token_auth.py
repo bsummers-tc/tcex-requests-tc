@@ -4,6 +4,7 @@ import time
 from collections.abc import Callable
 
 from requests import PreparedRequest, auth
+from requests.structures import CaseInsensitiveDict
 
 from ...input.field_type.sensitive import Sensitive
 
@@ -34,6 +35,10 @@ class TokenAuth(auth.AuthBase):
     def __call__(self, r: PreparedRequest) -> PreparedRequest:
         """Add the authorization headers to the request."""
         timestamp = int(time.time())
+
+        # ensure headers exist before assignment (PreparedRequest.headers may be None)
+        if r.headers is None:
+            r.headers = CaseInsensitiveDict()
 
         # Add required headers to auth.
         r.headers['Authorization'] = self._token_header()

@@ -2,6 +2,7 @@
 
 import logging
 from functools import cached_property
+from typing import Any, cast
 
 from ..app.config.install_json import InstallJson
 from ..input.model.module_requests_session_model import ModuleRequestsSessionModel
@@ -58,8 +59,9 @@ class RequestsTc:
         # 2. if token is set in the model, use that (no renewal)
         # 3. no token is not available, use api credentials
         if hasattr(registry.app, 'token') and self.install_json.is_external_app is False:
-            # token module is only available on tcex, not tcex-app-testing, or tcex-cli
-            tc_token = registry.app.token.get_token
+            # token module is only available on tcex, not tcex-app-testing, or tcex-cli, so the
+            # attribute is resolved dynamically (cast to Any) once the hasattr guard confirms it.
+            tc_token = cast('Any', registry.app).token.get_token
         elif self.model.tc_token is not None:
             tc_token = self.model.tc_token
 

@@ -62,19 +62,18 @@ class TcSession(Session):
 
     def _log_curl(self, response: Response):
         """Log the curl equivalent command."""
+        request = response.request
+        if request is None or request.url is None:
+            return
 
         # don't show curl message for logging commands
         # APP-79 - adding logging of request as curl commands
-        # if response.request.url is not None and '/v2/logs/app' not in response.request.url:
+        # if request.url is not None and '/v2/logs/app' not in request.url:
         #     if not response.ok or self.log_curl:
-        if (response.request.url is not None and '/v2/logs/app' not in response.request.url) and (
-            not response.ok or self.log_curl
-        ):
+        if ('/v2/logs/app' not in request.url) and (not response.ok or self.log_curl):
             with contextlib.suppress(Exception):
                 self.log.debug(
-                    self.requests_to_curl.convert(
-                        response.request, proxies=self.proxies, verify=self.verify
-                    )
+                    self.requests_to_curl.convert(request, proxies=self.proxies, verify=self.verify)
                 )
 
     def request(self, method, url, **kwargs):

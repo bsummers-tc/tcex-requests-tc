@@ -76,7 +76,8 @@ class TcSession(Session):
                     self.requests_to_curl.convert(request, proxies=self.proxies, verify=self.verify)
                 )
 
-    def request(self, method, url, **kwargs):
+    # intentional, correct-by-design stricter override (simplified signature for internal use)
+    def request(self, method, url, **kwargs):  # ty: ignore[invalid-method-override]
         """Override request method disabling verify on token renewal if disabled on session."""
         response = super().request(method, self.url(url), **kwargs)
         bad_request_code = 401
